@@ -69,7 +69,6 @@ docker run --name desafio-front -p 3000:3000 desafio-front
 ## Arquitetura
 - A arquitetura do serviço foi construida com separação em módulos dos recursos
 
-Os módulos do redux e redux saga foram separados seguindo o padrão Duck pattern.
 - com.desafio
   - config
   - exception
@@ -90,14 +89,9 @@ Clonagem do diretório:
 git clone https://github.com/robsonalvz/desafio
 ```
 
-Entre dentro do projeto desafio-front
+Entre dentro do projeto desafio-api
 ```
 cd desafio-api
-```
-
-Instale as dependencias do projeto
-```
-yarn install
 ```
 
 ## Configuração
