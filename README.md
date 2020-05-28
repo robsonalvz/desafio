@@ -67,7 +67,7 @@ docker run --name desafio-front -p 3000:3000 desafio-front
 - Docker
 
 ## Arquitetura
-- A arquitetura do serviço foi construida com separação em módulos dos recursos
+- A arquitetura do serviço foi construida com separação em módulos dos recursos e testes unitários para cada módulo.
 
 - com.desafio
   - config
