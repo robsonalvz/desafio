@@ -1,0 +1,5 @@
+spring.datasource.url=jdbc:postgresql://localhost:5432/desafio
+spring.datasource.username=robsonalvz
+spring.datasource.password=@teste123
+spring.jpa.hibernate.ddl-auto=update
+server.port=9000

@@ -1,0 +1,40 @@
+version: '3.3'
+
+services:
+
+  postgresdb:
+    image: postgres:12
+    container_name: postgresdb
+    restart: always
+    ports:
+      - 5432:5432
+    volumes:
+      - postgres_tracy:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=123
+      - POSTGRES_DB=desafio
+    networks:
+      - webnet
+
+  desafio-api:
+    image: robsonalvz/desafio
+    container_name: desafio-api
+    restart: always
+    ports:
+      - 9090:9090
+    depends_on:
+      - postgresdb
+    environment:
+      - SERVER_PORT=9090
+      - SPRING_PROFILES_ACTIVE=prod
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgresdb:5432/desafio
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=123
+    networks:
+      - webnet
+volumes:
+  postgres_desafio:
+
+networks:
+  webnet:

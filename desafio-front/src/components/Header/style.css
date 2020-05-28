@@ -1,0 +1,38 @@
+.header{
+  background-color: #002a52!important;
+  width: 100%;
+  height: 70px;
+  margin-bottom:20px;
+}
+.title-header{
+  position: absolute;
+  margin: 0 auto;
+  top: 14px;
+  color:white;
+  font-weight: 600;
+  right: 30%!important;
+  left: 30%!important;
+}
+.menu{
+  position: absolute;
+  left:10px;
+  top:20px;
+}
+.forward{
+  position: absolute;
+  right:20px;
+  top: 22px;
+}
+.titleHeader{
+  color:white;
+  font-weight: bold;
+  font-size: 20px;
+  position: absolute;
+  left:60px;
+  top: 16px;
+}
+.backImage{
+  position: absolute;
+  left:20px;
+  top:24px
+}
