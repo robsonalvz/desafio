@@ -26,9 +26,8 @@ ENV PATH /front/node_modules/.bin:$PATH
 COPY desafio-front/package.json /front/package.json
 RUN npm install
 RUN npm install react-scripts@3.0.1 -g
+RUN npm run build
 COPY desafio-front/ /front
-
-CMD ["npm", "run", "build"]
 
 # Nginx
 FROM nginx:1.16.0-alpine
