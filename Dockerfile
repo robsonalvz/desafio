@@ -32,7 +32,8 @@ CMD ["npm", "run", "build"]
 
 # Nginx
 FROM nginx:1.16.0-alpine
-COPY --from=MAVEN_BUILD /build/target/desafio-0.0.1-SNAPSHOT.jar /app/
+WORKDIR /app2/
+COPY --from=MAVEN_BUILD /build/target/desafio-0.0.1-SNAPSHOT.jar /app2/
 COPY --from=build /front/build /usr/share/nginx/html
 EXPOSE 80
 
