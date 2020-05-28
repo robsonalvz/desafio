@@ -30,7 +30,7 @@ COPY desafio-front/ /front
 RUN npm run build
 
 # Nginx
-FROM nginx:1.16.0-alpine
+FROM nginx
 RUN add-apt-repository -r ppa:webupd8team/java
 RUN apt-get update && apt-get install -y apache2 && apt-get clean && rm -rf /var/lib/apt/lists/*
 RUN \
