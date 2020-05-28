@@ -28,25 +28,13 @@ RUN npm install
 RUN npm install react-scripts@3.0.1 -g
 COPY desafio-front/ /front
 RUN npm run build
+CMD ["npm", "run", "build"]
 
 # Nginx
-FROM nginx
-RUN add-apt-repository -r ppa:webupd8team/java
-RUN apt-get update && apt-get install -y apache2 && apt-get clean && rm -rf /var/lib/apt/lists/*
-RUN \
-  sed -i 's/# \(.*multiverse$\)/\1/g' /etc/apt/sources.list && \
-  apt-get update && \
-  apt-get -y upgrade
-RUN apt-get -y install supervisor && \
-  mkdir -p /var/log/supervisor && \
-  mkdir -p /etc/supervisor/conf.d
-RUN mkdir /desafio
-WORKDIR /desafio
-COPY --from=MAVEN_BUILD /build/target/desafio-0.0.1-SNAPSHOT.jar desafio/desafio-0.0.1-SNAPSHOT.jar 
+FROM nginx:1.16.0-alpine
+COPY --from=MAVEN_BUILD /build/target/desafio-0.0.1-SNAPSHOT.jar /app/
 COPY --from=build /front/build /usr/share/nginx/html
 EXPOSE 80
 
-ADD supervisor.conf /etc/supervisor.conf
-
-CMD ["supervisord", "-c", "/etc/supervisor.conf"]
+CMD ["java","jar", "desafio-0.0.1-SNAPSHOT.jar", "&&", "nginx", "-g", "daemon off;"]
 
