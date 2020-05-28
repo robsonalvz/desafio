@@ -31,8 +31,10 @@ export default function Register({ onClose, visible, setVisible, data, callback,
   };
   const validator = (rule, value, callback) => {
     try {
-      if (!isCPF(value)) {
-        throw new Error("CPF informado é inválido!");
+      if (!!value){
+        if (!isCPF(value)) {
+          throw new Error("CPF informado é inválido!");
+        }
       }
       callback();
     } catch (err) {
