@@ -69,6 +69,8 @@ docker run --name desafio-front -p 3000:3000 desafio-front
 ## Arquitetura
 - A arquitetura do serviço foi construida com separação em módulos dos recursos e testes unitários para cada módulo.
 
+- A aplicação está com autenticação basic, e com usuário e senha pré-definidos user - 'admin' - password - 'admin'
+
 - com.desafio
   - config
   - exception
