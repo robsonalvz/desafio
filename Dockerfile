@@ -13,15 +13,15 @@ WORKDIR /build/
 RUN mvn package
 FROM openjdk:8-jre-alpine
 WORKDIR /app
-COPY --from=MAVEN_BUILD /build/target/desafio-0.0.1-SNAPSHOT.jar /app/
+#COPY --from=MAVEN_BUILD /build/target/desafio-0.0.1-SNAPSHOT.jar /app/
 #COPY build/target/desafio-0.0.1-SNAPSHOT.jar /app/
 EXPOSE 9000
-CMD ["java", "-jar", "desafio-0.0.1-SNAPSHOT.jar"]
+# CMD ["java", "-jar", "desafio-0.0.1-SNAPSHOT.jar"]
 #ENTRYPOINT ["java", "-jar", "desafio-0.0.1-SNAPSHOT.jar"]
 
 # Frontend
 FROM node:12.7-alpine as build
-WORKDIR /front
+WORKDIR /front/
 ENV PATH /front/node_modules/.bin:$PATH
 COPY desafio-front/package.json /front/package.json
 RUN npm install
@@ -32,8 +32,12 @@ CMD ["npm", "run", "build"]
 
 # Nginx
 FROM nginx:1.16.0-alpine
+WORKDIR /desafio
+COPY --from=MAVEN_BUILD /build/target/desafio-0.0.1-SNAPSHOT.jar desafio/desafio-0.0.1-SNAPSHOT.jar 
 COPY --from=build /front/build /usr/share/nginx/html
 EXPOSE 80
 
-CMD ["nginx", "-g", "daemon off;"]
+ADD supervisor.conf /etc/supervisor.conf
+
+CMD ["supervisord", "-c", "/etc/supervisor.conf"]
 
