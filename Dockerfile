@@ -6,14 +6,15 @@ ENV POSTGRES_PASSWORD @teste123
 EXPOSE 5432
 
 # Backend
-# FROM maven:3.5.2-jdk-8-alpine AS MAVEN_BUILD
-# COPY desafio-api/pom.xml /build/
-# COPY desafio-api/src /build/src/
-# WORKDIR /build/
-# RUN mvn package
+FROM maven:3.5.2-jdk-8-alpine AS MAVEN_BUILD
+COPY desafio-api/pom.xml /build/
+COPY desafio-api/src /build/src/
+WORKDIR /build/
+RUN mvn package
 FROM openjdk:8-jre-alpine
 WORKDIR /app
-COPY desafio-api/target/desafio-0.0.1-SNAPSHOT.jar /app/
+COPY --from=MAVEN_BUILD /build/target/docker-boot-intro-0.1.0.jar /app/
+#COPY build/target/desafio-0.0.1-SNAPSHOT.jar /app/
 EXPOSE 9000
 CMD ["java", "-jar", "desafio-0.0.1-SNAPSHOT.jar"]
 #ENTRYPOINT ["java", "-jar", "desafio-0.0.1-SNAPSHOT.jar"]
