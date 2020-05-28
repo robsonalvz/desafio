@@ -17,7 +17,7 @@ RUN npm install react-scripts@3.0.1 -g
 # Bundle app source
 COPY . /app
 
-CMD ["npm", "run", "build"]
+RUN npm run build
 
 # production environment
 FROM nginx:1.16.0-alpine
